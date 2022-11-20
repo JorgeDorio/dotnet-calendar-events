@@ -3,28 +3,35 @@ namespace calendar_events;
 
 public class Event : IEvent
 {
-    public string? Title {get; set; }
-    public DateTime EventDate {get; set; }
-    public string? Description {get; set; }
-        
+	public string? Title {get; set; }
+	public DateTime EventDate {get; set; }
+	public string? Description {get; set; }
 
-    public Event(string title, string date, string description)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Event(string title, string date)
-    {
-        throw new NotImplementedException();  
-    }
+	public Event(string title, string date, string description)
+	{
+		Title = title;
+		EventDate = DateTime.Parse(date);
+		Description = description;
+	}
 
-    public void DelayDate(int days)
-    {
-        throw new NotImplementedException();
-    }
+	public Event(string title, string date)
+	{
+		Title = title;
+		EventDate = DateTime.Parse(date);
+	}
 
-    public string PrintEvent(string format)
-    {
-        throw new NotImplementedException();      
-    }
+	public void DelayDate(int days)
+	{
+		EventDate = EventDate.AddDays(days);
+	}
+
+	public string PrintEvent(string format)
+	{
+		string date = EventDate.ToString("d");
+
+		if (format == "normal")
+			return $"Evento = {Title}\nDate = {date}\n";
+		else
+			return $"Evento = {Title}\nDate = {date}\nDescription = {Description}";    }
 }

@@ -3,77 +3,89 @@
 
 public class EventList
 {
-    private class Node
-    {
-        public <> Value;
-        public Node? Next;
+	private class Node
+	{
+		public Event Value;
+		public Node? Next;
 
-        public Node(<> t)
-        {
-            Value = t;
-            Next = null;
-        }
-    }
+		public Node(Event t)
+		{
+			Value = t;
+			Next = null;
+		}
+	}
 
-    private Node? Head;
+	private Node? Head;
 
-    public void GenericList()
-    {
-        Head = null;
-    }
+	public void GenericList()
+	{
+		Head = null;
+	}
 
-    public void Add(<> input) 
-    {
-        if (Head == null)
-        {
-            Head = new Node(input);            
-        }
-        else
-        {
-            //Encontra onde inserir o próximo nó na lista.
-            Node? lastNode = Head;
-            while(lastNode.Next != null)   lastNode = lastNode.Next;
+	public void Add(Event input) 
+	{
+		if (Head == null)
+		{
+			Head = new Node(input);            
+		}
+		else
+		{
+			//Encontra onde inserir o próximo nó na lista.
+			Node? lastNode = Head;
+			while(lastNode.Next != null)   lastNode = lastNode.Next;
 
-            lastNode.Next = new Node(input);                        
-        }
-    }
+			lastNode.Next = new Node(input);                        
+		}
+	}
 
-    public void Print(string format)
-    {
-        Node? printNode = Head;
-        while(printNode.Next != null)
-        {
-            
-        }
-        
-    }
+	public void Print(string format)
+	{
+		Node? printNode = Head;
+		while(printNode.Next != null)
+		{
+			Console.Write(printNode.Value.PrintEvent(format));
+		}
 
-    public Event Index(int index)
-    {
-        Node? searchNode = Head;
-        for(int i = 0; i < index; i++)
-        {
-            if(searchNode.Next != null)
-            {
-                searchNode = searchNode.Next;
-                continue;
-            }
-            else
-            {
-                throw new InvalidOperationException("Não há elementos suficientes na lista");
-            }
-        }
-        return searchNode.Value;
-    }
+	}
 
-    public int SearchByTitle(string title)
-    {
-        throw new NotImplementedException();     
-    }
+	public Event Index(int index)
+	{
+		Node? searchNode = Head;
+		for(int i = 0; i < index; i++)
+		{
+			if(searchNode.Next != null)
+			{
+				searchNode = searchNode.Next;
+				continue;
+			}
+			else
+			{
+				throw new InvalidOperationException("Não há elementos suficientes na lista");
+			}
+		}
+		return searchNode.Value;
+	}
 
-    public int SearchByDate(string dateSearch)
-    {
-        throw new NotImplementedException();   
-    }
-    
+	public int SearchByTitle(string title)
+	{
+		Node? lastNode = Head;
+		bool find = false;
+		int index = 0;
+
+		while(!find){
+			/* if (lastNode == null) throw new InvalidOperationException(); */
+			if (lastNode.Value.Equals(title)) find = true;
+			else {
+				lastNode = lastNode.Next;
+				index++;
+			}
+		}
+		return index;
+	}
+
+	public int SearchByDate(string dateSearch)
+	{
+		throw new NotImplementedException();   
+	}
+
 }

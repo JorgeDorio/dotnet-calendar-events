@@ -73,8 +73,8 @@ public class EventList
 		int index = 0;
 
 		while(!find){
-			/* if (lastNode == null) throw new InvalidOperationException(); */
-			if (lastNode.Value.Equals(title)) find = true;
+			if (lastNode == null) throw new InvalidOperationException();
+			if (lastNode.Value.Title.Equals(title)) find = true;
 			else {
 				lastNode = lastNode.Next;
 				index++;
@@ -85,7 +85,18 @@ public class EventList
 
 	public int SearchByDate(string dateSearch)
 	{
-		throw new NotImplementedException();   
+		Node? lastNode = Head;
+		bool find = false;
+		int index = 0;
+		while(!find){
+			if(lastNode == null) throw new InvalidOperationException();
+			if(lastNode.Value.EventDate == DateTime.Parse(dateSearch)) find = true;
+			else {
+				lastNode = lastNode.Next;
+				index++;
+			}
+		}
+		return index;
 	}
 
 }
